@@ -1,8 +1,10 @@
 package ru.gorokhovsa.springbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.gorokhovsa.springbackend.model.Task;
 import ru.gorokhovsa.springbackend.service.TaskService;
 
 import java.util.List;
@@ -16,6 +18,11 @@ public class TaskController {
     @Autowired
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
+    }
+
+    @GetMapping("/tasks")
+    public List<Task> getAllTasks() {
+        return taskService.getAllTasks();
     }
 
 }

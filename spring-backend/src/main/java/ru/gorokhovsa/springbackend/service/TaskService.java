@@ -2,7 +2,10 @@ package ru.gorokhovsa.springbackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.gorokhovsa.springbackend.model.Task;
 import ru.gorokhovsa.springbackend.repository.TaskRepository;
+
+import java.util.List;
 
 @Service
 public class TaskService {
@@ -11,6 +14,10 @@ public class TaskService {
     @Autowired
     public TaskService(TaskRepository repository) {
         this.repository = repository;
+    }
+
+    public List<Task> getAllTasks() {
+        return repository.findAll();
     }
 
 }
