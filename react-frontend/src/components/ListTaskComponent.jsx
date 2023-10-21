@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import TaskService from "../services/TaskService";
+import moment from "moment";
 
 function ListTaskComponent() {
   const [tasks,setTasks] = useState([]);
@@ -30,8 +31,8 @@ function ListTaskComponent() {
                 task =>
                   <tr key={task.id}>
                     <td>{task.taskText}</td>
-                    <td>{task.addTime}</td>
-                    <td>{task.endTime}</td>
+                    <td>{moment.utc(task.addTime).format("DD MMM YYYY HH:mm")}</td>
+                    <td>{task.endTime?moment.utc(task.endTime).format("DD MMM YYYY HH:mm"):""}</td>
                   </tr>
               )
             }
