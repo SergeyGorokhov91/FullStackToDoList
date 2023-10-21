@@ -1,5 +1,6 @@
 package ru.gorokhovsa.springbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
@@ -15,8 +16,10 @@ public class Task {
     @Column(name = "task_text")
     private String taskText;
     @Column(name = "add_time")
+    @JsonProperty("addDate")
     private ZonedDateTime addTime;
     @Column(name = "end_ime")
+    @JsonProperty("endDate")
     private ZonedDateTime endTime;
 
     public Task() {
