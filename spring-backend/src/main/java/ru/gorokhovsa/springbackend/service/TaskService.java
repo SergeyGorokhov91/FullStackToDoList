@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.gorokhovsa.springbackend.model.Task;
 import ru.gorokhovsa.springbackend.repository.TaskRepository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Service
@@ -20,4 +21,7 @@ public class TaskService {
         return repository.findAll();
     }
 
+    public Task save(Task task) {
+        return repository.save(task);
+    }
 }
