@@ -1,6 +1,7 @@
 package ru.gorokhovsa.springbackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gorokhovsa.springbackend.model.Task;
 import ru.gorokhovsa.springbackend.service.TaskService;
@@ -28,6 +29,11 @@ public class TaskController {
     @PostMapping("/tasks")
     public Task createTask(@RequestBody Task task) {
         return taskService.save(task);
+    }
+
+    @GetMapping("/tasks/{id}")
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
+        return taskService.getTaskById(id);
     }
 
 }
