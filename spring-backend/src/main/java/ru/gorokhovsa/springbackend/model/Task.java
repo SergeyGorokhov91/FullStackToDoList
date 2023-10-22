@@ -18,7 +18,7 @@ public class Task {
     @Column(name = "add_time")
     @JsonProperty("addDate")
     private ZonedDateTime addTime;
-    @Column(name = "end_ime")
+    @Column(name = "end_time")
     @JsonProperty("endDate")
     private ZonedDateTime endTime;
 
