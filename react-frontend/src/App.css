@@ -46,3 +46,13 @@
   text-align: center;
   color: white;
 }
+
+.date-style {
+  color: black;
+  font-size: 13px;
+}
+
+.time-style {
+  color: gray;
+  font-size: 12px;
+}
