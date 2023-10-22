@@ -10,4 +10,8 @@ function createTask(task) {
     return axios.post(TASK_API_BASE_URL, task);
 }
 
-export { getTasks, createTask };
+function getTaskById(taskId) {
+    return axios.get(TASK_API_BASE_URL+'/'+taskId);
+}
+
+export { getTasks,createTask, getTaskById };
