@@ -19,6 +19,14 @@ function ListTaskComponent() {
      navigate('/add-task');
   }
 
+  const editTask = (id) => {
+    navigate(`/update-task/${id}`)
+  }
+
+  const deleteTask = (id) => {
+    
+  }
+
   return (
     <div>
       <h2 className="text-center">Task List</h2>
@@ -60,6 +68,11 @@ function ListTaskComponent() {
                       <span className="time-style">
                         {task.endDate ?moment.utc(task.endDate).local().format("HH:mm"):"-- --"}
                       </span>
+                    </td>
+                    <td>
+                      <button onClick={()=> editTask(task.id)} className="btn btn-info">Update</button>
+                      <button onClick={()=> deleteTask(task.id)} className="btn btn-danger">Delete</button>
+
                     </td>
                   </tr>
               )
