@@ -27,7 +27,8 @@ function UpdateTaskComponent(props) {
     setEndDate(event.target.value);
   };
 
-  const updateTask = () => {
+  const updateTask = (e) => {
+    e.preventDefault();
     let task = {
       taskText:text,
       endDate:endDate? moment(endDate).format():""
@@ -44,7 +45,7 @@ function UpdateTaskComponent(props) {
       <div className="container">
         <div className="row ">
           <div className="card col-md-6 offset-md-3 offset-md-3">
-            <h3 className="text center">Add task</h3>
+            <h3 className="text center">Update task</h3>
             <div className="card-body">
               <form>
                 <div className="form-group">
