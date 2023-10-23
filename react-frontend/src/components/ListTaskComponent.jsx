@@ -24,14 +24,14 @@ function ListTaskComponent() {
   }
 
   const deleteTask = (id) => {
-    
+
   }
 
   return (
     <div>
       <h2 className="text-center">Task List</h2>
       <div className="row">
-        <div className="pl-0">
+        <div className="pl-0 pb-2">
          <button className="btn btn-primary" onClick={addTask}> Add Todo Task</button>
         </div>
       </div>
@@ -40,9 +40,9 @@ function ListTaskComponent() {
           <thead>
             <tr>
               <th>Task</th>
-              <th>Created</th>
-              <th>Do until</th>
-              <th>Actions</th>
+              <th className="time-col">Created</th>
+              <th className="time-col">Do until</th>
+              <th className="action-col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -71,7 +71,7 @@ function ListTaskComponent() {
                     </td>
                     <td>
                       <button onClick={()=> editTask(task.id)} className="btn btn-info">Update</button>
-                      <button onClick={()=> deleteTask(task.id)} className="btn btn-danger">Delete</button>
+                      <button onClick={()=> deleteTask(task.id)} className="btn btn-danger" style={{marginLeft:"10px"}}>Delete</button>
 
                     </td>
                   </tr>

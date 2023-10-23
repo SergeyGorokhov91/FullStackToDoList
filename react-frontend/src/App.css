@@ -56,3 +56,11 @@
   color: gray;
   font-size: 12px;
 }
+
+.time-col {
+  width: 78px;
+}
+
+.action-col {
+  width: 177px;
+}
