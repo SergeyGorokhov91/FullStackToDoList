@@ -11,7 +11,9 @@ import ru.gorokhovsa.springbackend.repository.TaskRepository;
 
 import java.lang.module.ResolutionException;
 import java.time.ZonedDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TaskService {
@@ -45,5 +47,15 @@ public class TaskService {
         if (taskDetails.getEndTime() != null) task.setEndTime(taskDetails.getEndTime());
         Task updatedTask = repository.save(task);
         return ResponseEntity.ok(updatedTask);
+    }
+
+    public ResponseEntity<Map<String,Boolean>> deleteTask(Long id) {
+        Task task = repository
+                .findById(id)
+                .orElseThrow(() -> new ResolutionException("Task not exist with id: " + id));
+        repository.delete(task);
+        Map<String,Boolean> response = new HashMap<>();
+        response.put("deleted",Boolean.TRUE);
+        return ResponseEntity.ok(response);
     }
 }

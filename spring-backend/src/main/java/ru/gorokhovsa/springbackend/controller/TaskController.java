@@ -8,6 +8,7 @@ import ru.gorokhovsa.springbackend.service.TaskService;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -41,6 +42,11 @@ public class TaskController {
             @PathVariable Long id,
             @RequestBody Task taskDetails) {
         return taskService.updateTask(id,taskDetails);
+    }
+
+    @DeleteMapping("/tasks/{id}")
+    public ResponseEntity<Map<String,Boolean>> deleteTask(@PathVariable Long id) {
+        return taskService.deleteTask(id);
     }
 
 }
