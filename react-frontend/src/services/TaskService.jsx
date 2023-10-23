@@ -14,4 +14,8 @@ function getTaskById(taskId) {
     return axios.get(TASK_API_BASE_URL+'/'+taskId);
 }
 
-export { getTasks,createTask, getTaskById };
+function updateTaskById(task,taskId) {
+    return axios.put(TASK_API_BASE_URL+'/'+taskId,task);
+}
+
+export { getTasks,createTask,getTaskById,updateTaskById };

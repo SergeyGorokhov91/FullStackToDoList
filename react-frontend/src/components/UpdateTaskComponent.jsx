@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import {useNavigate} from "react-router-dom";
-import {getTaskById} from "../services/TaskService";
+import {getTaskById,updateTaskById} from "../services/TaskService";
 import {withParams} from "../services/withParams";
 
 function UpdateTaskComponent(props) {
@@ -34,6 +34,9 @@ function UpdateTaskComponent(props) {
       endDate:endDate? moment(endDate).format():""
     }
     console.log("task => "+JSON.stringify(task))
+    updateTaskById(task, id).then(() => {
+      navigate("/tasks")
+    })
   }
 
   function cancel() {
