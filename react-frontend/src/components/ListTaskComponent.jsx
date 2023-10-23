@@ -16,11 +16,11 @@ function ListTaskComponent() {
   },[]);
 
   const addTask = () => {
-     navigate('/add-task');
+     navigate('/add-task/_add');
   }
 
   const editTask = (id) => {
-    navigate(`/update-task/${id}`)
+    navigate(`/add-task/${id}`)
   }
 
   const deleteTask = (id) => {

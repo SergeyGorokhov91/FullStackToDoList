@@ -1,43 +1,76 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from "moment";
 import {useNavigate} from "react-router-dom";
-import {createTask} from "../services/TaskService";
+import {createTask, getTaskById, updateTaskById} from "../services/TaskService";
+import {withParams} from "../services/withParams";
 
-function CreateTaskComponent() {
+function CreateTaskComponent(props) {
   const [text,setText] = useState("");
-  const [date,setDate] = useState("");
+  const [endDate,setEndDate] = useState("");
   const navigate = useNavigate();
+  let {id} = props.params;
+
+  useEffect(() => {
+    if(id > 0) {
+      getTaskById(id).then(r => {
+        let task = r.data;
+        setText(task.taskText);
+        setEndDate(task.endDate ? moment.utc(task.endDate).local().format("YYYY-MM-DD") : '');
+      })
+    }
+  },[id])
 
   const handleTextChange = (event) => {
     setText(event.target.value);
   };
 
   const handleDateChange = (event) => {
-    setDate(event.target.value);
+    setEndDate(event.target.value);
   };
 
-  const saveTask = (event) => {
+  const saveOrUpdateTask = (event) => {
     event.preventDefault();
-    let task = {
-      taskText:text,
-      addDate: moment().format(),
-      endDate:date? moment(date).format():""
+    if(id === "_add") {
+      let task = {
+        taskText:text,
+        addDate: moment().format(),
+        endDate:endDate? moment(endDate).format():""
+      }
+      createTask(task).then(() => {
+        navigate("/tasks")
+      });
     }
-    createTask(task).then(() => {
-      navigate("/tasks")
-    });
+
+    if(id > 0) {
+      let task = {
+        taskText:text,
+        endDate:endDate? moment(endDate).format():""
+      }
+      updateTaskById(task, id).then(() => {
+        navigate("/tasks")
+      })
+    }
   }
 
   function cancel() {
     navigate("/tasks")
   }
 
+  const getTitle = () =>{
+    if(id > 0) {
+      return <h3 className="text center">Update task</h3>
+    }
+    if(id === "_add"){
+      return <h3 className="text center">Add task</h3>
+    }
+  }
+
   return (
     <div>
-      <div className="container">
-        <div className="row ">
+      <div className="container" style={{marginTop: "15px"}}>
+        <div className="row">
           <div className="card col-md-6 offset-md-3 offset-md-3">
-            <h3 className="text center">Add task</h3>
+            {getTitle()}
             <div className="card-body">
               <form>
                 <div className="form-group">
@@ -55,10 +88,10 @@ function CreateTaskComponent() {
                     className="form-control mb-3"
                     type="date"
                     onChange={handleDateChange}
-                    value={date}
+                    value={endDate}
                   />
                 </div>
-                <button className="btn btn-success" onClick={saveTask}>Save</button>
+                <button className="btn btn-success" onClick={saveOrUpdateTask}>Save</button>
                 <button className="btn btn-danger" onClick={cancel} style={{marginLeft:"10px"}}>Cancel</button>
 
               </form>
@@ -70,4 +103,4 @@ function CreateTaskComponent() {
   );
 }
 
-export default CreateTaskComponent;
+export default withParams(CreateTaskComponent);
