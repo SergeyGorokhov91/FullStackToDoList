@@ -29,6 +29,10 @@ function ListTaskComponent() {
     });
   }
 
+  function viewTask(id) {
+    navigate(`/view-task/${id}`)
+  }
+
   return (
     <div>
       <h2 className="text-center">Task List</h2>
@@ -73,6 +77,8 @@ function ListTaskComponent() {
                     </td>
                     <td>
                       <button onClick={()=> editTask(task.id)} className="btn btn-info">Update</button>
+                      <button onClick={()=> viewTask(task.id) } className="btn btn-info" style={{marginLeft:"10px"}}>View</button>
+
                       <button onClick={()=> deleteTask(task.id)} className="btn btn-danger" style={{marginLeft:"10px"}}>Delete</button>
                     </td>
                   </tr>

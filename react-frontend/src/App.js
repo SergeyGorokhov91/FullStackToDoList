@@ -5,6 +5,7 @@ import FooterComponent from "./components/FooterComponent";
 import {BrowserRouter as Router} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import CreateTaskComponent from "./components/CreateTaskComponent";
+import ViewTaskComponent from "./components/ViewTaskComponent";
 function App() {
   return (
     <div>
@@ -15,6 +16,7 @@ function App() {
             <Route path="/" element={<ListTaskComponent/>}></Route>
             <Route path="/tasks" element={<ListTaskComponent/>}></Route>
             <Route path="/add-task/:id" element={<CreateTaskComponent/>}></Route>
+            <Route path="/view-task/:id" element={<ViewTaskComponent/>}></Route>
           </Routes>
         </div>
         <FooterComponent/>
