@@ -34,7 +34,8 @@ function CreateTaskComponent(props) {
       let task = {
         taskText:text,
         addDate: moment().format(),
-        endDate:endDate? moment(endDate).format():""
+        endDate:endDate? moment(endDate).format():"",
+        isaDone: false
       }
       createTask(task).then(() => {
         navigate("/tasks")

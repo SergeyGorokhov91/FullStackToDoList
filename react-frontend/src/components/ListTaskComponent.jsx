@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getTasks, deleteTaskById} from "../services/TaskService";
+import {getTasks, deleteTaskById, updateTaskById} from "../services/TaskService";
 import moment from "moment";
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 
 function ListTaskComponent() {
   const [tasks, setTasks] = useState([]);
-  const [selectedTasks, setSelectedTasks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,17 +34,14 @@ function ListTaskComponent() {
   }
 
   function toggleTaskSelection(task) {
-    if (selectedTasks.includes(task.id)) {
-      setSelectedTasks((prevSelectedTasks) =>
-        prevSelectedTasks.filter((id) => id !== task.id)
-      );
-    } else {
-      setSelectedTasks((prevSelectedTasks) => [...prevSelectedTasks, task.id]);
-    }
+    task.isaDone = !isTaskSelected(task);
+    updateTaskById(task,task.id).then(() => {
+        navigate("/tasks")
+    })
   }
 
   function isTaskSelected(task) {
-    return selectedTasks.includes(task.id);
+    return task.isaDone;
   }
 
   function buttonsSelectionRelative(task) {

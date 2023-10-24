@@ -21,14 +21,17 @@ public class Task {
     @Column(name = "end_time")
     @JsonProperty("endDate")
     private ZonedDateTime endTime;
+    @Column(name = "done")
+    private Boolean isaDone;
 
     public Task() {
     }
 
-    public Task(String task, ZonedDateTime addTime, ZonedDateTime endTime) {
-        this.taskText = task;
+    public Task(String taskText, ZonedDateTime addTime, ZonedDateTime endTime, Boolean isaDone) {
+        this.taskText = taskText;
         this.addTime = addTime;
         this.endTime = endTime;
+        this.isaDone = isaDone;
     }
 
     public long getId() {
@@ -61,5 +64,24 @@ public class Task {
 
     public void setEndTime(ZonedDateTime endTime) {
         this.endTime = endTime;
+    }
+
+    public Boolean getIsaDone() {
+        return isaDone;
+    }
+
+    public void setIsaDone(Boolean isaDone) {
+        this.isaDone = isaDone;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", taskText='" + taskText + '\'' +
+                ", addTime=" + addTime +
+                ", endTime=" + endTime +
+                ", isaDone=" + isaDone +
+                '}';
     }
 }

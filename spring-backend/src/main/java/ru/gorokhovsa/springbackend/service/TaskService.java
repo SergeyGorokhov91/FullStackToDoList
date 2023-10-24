@@ -29,6 +29,7 @@ public class TaskService {
     }
 
     public Task save(Task task) {
+        if(task.getIsaDone() == null) task.setIsaDone(false);
         return repository.save(task);
     }
 
@@ -40,11 +41,13 @@ public class TaskService {
     }
 
     public ResponseEntity<Task> updateTask(Long id, Task taskDetails) {
+        System.out.println(taskDetails);
         Task task = repository
                 .findById(id)
                 .orElseThrow(() -> new ResolutionException("Task not exist with id: " + id));
         task.setTaskText(taskDetails.getTaskText());
         if (taskDetails.getEndTime() != null) task.setEndTime(taskDetails.getEndTime());
+        task.setIsaDone(taskDetails.getIsaDone());
         Task updatedTask = repository.save(task);
         return ResponseEntity.ok(updatedTask);
     }
