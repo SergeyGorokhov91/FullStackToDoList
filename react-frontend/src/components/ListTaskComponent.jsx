@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getTasks} from "../services/TaskService";
+import {getTasks, deleteTaskById} from "../services/TaskService";
 import moment from "moment";
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,9 @@ function ListTaskComponent() {
   }
 
   const deleteTask = (id) => {
-
+    deleteTaskById(id).then(() => {
+      setTasks(tasks.filter(task => task.id !== id));
+    });
   }
 
   return (
@@ -72,7 +74,6 @@ function ListTaskComponent() {
                     <td>
                       <button onClick={()=> editTask(task.id)} className="btn btn-info">Update</button>
                       <button onClick={()=> deleteTask(task.id)} className="btn btn-danger" style={{marginLeft:"10px"}}>Delete</button>
-
                     </td>
                   </tr>
               )

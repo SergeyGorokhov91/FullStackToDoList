@@ -18,4 +18,8 @@ function updateTaskById(task,taskId) {
     return axios.put(TASK_API_BASE_URL+'/'+taskId,task);
 }
 
-export { getTasks,createTask,getTaskById,updateTaskById };
+function deleteTaskById(taskId) {
+    return axios.delete(TASK_API_BASE_URL+'/'+taskId)
+}
+
+export { getTasks,createTask,getTaskById,updateTaskById,deleteTaskById };
