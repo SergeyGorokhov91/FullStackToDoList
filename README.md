@@ -1,7 +1,7 @@
 
 # FullStackToDoList
 
-Fullstack single page application "todo list".
+Fullstack single page application "todo list" with rest api.
 
 ## Использованные технологи:
 
@@ -12,6 +12,7 @@ Fullstack single page application "todo list".
 * SpringData JPA (Hibernate);
 * Embedded Tomcat;
 * PostgreSQL DB;
+* Postman для теста REST APIl
 
 Для фронтенда были использованы:
 * IDE WebStorm;
