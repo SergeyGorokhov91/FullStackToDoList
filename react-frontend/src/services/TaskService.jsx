@@ -22,4 +22,8 @@ function deleteTaskById(taskId) {
     return axios.delete(TASK_API_BASE_URL+'/'+taskId)
 }
 
-export { getTasks,createTask,getTaskById,updateTaskById,deleteTaskById };
+function getSearchedTasks(searchText) {
+    return axios.get(TASK_API_BASE_URL+'/search', { params: { text: searchText } });
+}
+
+export { getTasks,createTask,getTaskById,updateTaskById,deleteTaskById,getSearchedTasks };

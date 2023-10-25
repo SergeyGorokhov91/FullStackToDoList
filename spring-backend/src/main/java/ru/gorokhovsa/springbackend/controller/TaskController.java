@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import ru.gorokhovsa.springbackend.model.Task;
 import ru.gorokhovsa.springbackend.service.TaskService;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +46,11 @@ public class TaskController {
     @DeleteMapping("/tasks/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteTask(@PathVariable Long id) {
         return taskService.deleteTask(id);
+    }
+
+    @GetMapping("/tasks/search")
+    public ResponseEntity<List<Task>> searchTask(@RequestParam("text") String searchText) {
+        return taskService.findByTaskTextContaining(searchText);
     }
 
 }

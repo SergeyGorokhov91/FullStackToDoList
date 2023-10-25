@@ -1,19 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import {getTasks, deleteTaskById, updateTaskById} from "../services/TaskService";
+import {getTasks, deleteTaskById, updateTaskById, getSearchedTasks} from "../services/TaskService";
 import moment from "moment";
 import { useNavigate } from 'react-router-dom';
 
-
-
-function ListTaskComponent() {
+function ListTaskComponent({searchText}) {
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getTasks().then((response) => {
-      setTasks(response.data);
-    });
-  }, []);
+    if(searchText && searchText.length > 0) {
+      getSearchedTasks(searchText).then((response) => {
+        setTasks(response.data)
+      })
+    }else {
+      getTasks().then((response) => {
+        setTasks(response.data);
+      });
+    }
+  }, [searchText]);
 
   const addTask = () => {
     navigate("/add-task/_add");
@@ -78,6 +82,7 @@ function ListTaskComponent() {
           </button>
         </div>
       </div>
+
       <div className="row">
         <table className="table table-striped table-bordered">
           <thead>

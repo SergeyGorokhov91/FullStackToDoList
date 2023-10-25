@@ -61,4 +61,9 @@ public class TaskService {
         response.put("deleted",Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
+    public ResponseEntity<List<Task>> findByTaskTextContaining(String searchText) {
+        List<Task> list = repository.findByTaskTextContaining(searchText);
+        return ResponseEntity.ok(list);
+    }
 }
