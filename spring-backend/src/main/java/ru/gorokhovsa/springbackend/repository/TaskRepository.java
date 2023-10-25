@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 @EnableJpaRepositories
 public interface TaskRepository extends JpaRepository<Task,Long> {
-    List<Task> findByTaskTextContaining(String searchText);
+    List<Task> findByTaskTextContainingIgnoreCase(String searchText);
 }

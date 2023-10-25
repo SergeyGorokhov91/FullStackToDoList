@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 function ListTaskComponent({searchText}) {
   const [tasks, setTasks] = useState([]);
   const navigate = useNavigate();
+  searchText = searchText.toLowerCase();
 
   useEffect(() => {
     if(searchText && searchText.length > 0) {
@@ -72,6 +73,26 @@ function ListTaskComponent({searchText}) {
     }
   }
 
+  function highlightSearchText(text) {
+    if (searchText && searchText.length > 0) {
+      const parts = text.toLowerCase().split(searchText);
+      return (
+        <span>
+        {parts.map((part, index) => (
+          <React.Fragment key={index}>
+            {part}
+            {index < parts.length - 1 && (
+              <mark style={{padding:0}}>{searchText}</mark>
+            )}
+          </React.Fragment>
+        ))}
+      </span>
+      );
+    } else {
+      return text;
+    }
+  }
+
   return (
     <div>
       <h2 className="text-center">Task List</h2>
@@ -110,7 +131,7 @@ function ListTaskComponent({searchText}) {
                       paddingLeft: "5px",
                     }}
                   >
-                      {task.taskText}
+                      {highlightSearchText(task.taskText)}
                     </span>
                 </div>
               </td>

@@ -41,7 +41,6 @@ public class TaskService {
     }
 
     public ResponseEntity<Task> updateTask(Long id, Task taskDetails) {
-        System.out.println(taskDetails);
         Task task = repository
                 .findById(id)
                 .orElseThrow(() -> new ResolutionException("Task not exist with id: " + id));
@@ -63,7 +62,7 @@ public class TaskService {
     }
 
     public ResponseEntity<List<Task>> findByTaskTextContaining(String searchText) {
-        List<Task> list = repository.findByTaskTextContaining(searchText);
+        List<Task> list = repository.findByTaskTextContainingIgnoreCase(searchText);
         return ResponseEntity.ok(list);
     }
 }
